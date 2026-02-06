@@ -1,64 +1,93 @@
-import Image from "next/image";
+import { ReactElement } from "react";
+import bgImage from "./images/bg-mobile-dark.jpg";
+
+interface ToDoItemParams {
+  todo: string;
+  isCompleted: boolean;
+}
+
+function ToDoItemComponent(params: ToDoItemParams): ReactElement {
+  return (
+    <article className="border-b w-full h-10 flex items-center p-2 last:border-0">
+      <input type="checkbox" name="todo" id="todo" className="hidden" />
+      <label
+        htmlFor="todo"
+        className="border rounded-full w-5 h-5 mr-3"
+      ></label>
+      <span>{params.todo}</span>
+    </article>
+  );
+}
 
 export default function Home() {
+  const todoItems = [
+    {
+      todo: "To Do",
+      isCompleted: false,
+    },
+    {
+      todo: "Completed",
+      isCompleted: true,
+    },
+    {
+      todo: "All",
+      isCompleted: false,
+    },
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <div className="min-h-screen">
+      <div className="flex flex-row">
+        <div
+          style={{ backgroundImage: `url(${bgImage.src})` }}
+          className="bg-cover bg-no-repeat w-full h-64 absolute z-100"
+        ></div>
+      </div>
+
+      <main className="min-h-screen relative flex z-200 items-center justify-center flex-col">
+        <header className="flex flex-row justify-between items-center w-xs mb-4">
+          <h1 className="uppercase font-bold text-xl">todo</h1>
+
+          <button>
+            <span>son</span>
+          </button>
+        </header>
+
+        <form
+          action="#"
+          className="bg-blue-300 w-xs flex column items-center rounded h-10 p-2"
+        >
+          <input
+            type="checkbox"
+            name="create_todo"
+            id="create-todo"
+            className="hidden"
+          />
+          <label
+            htmlFor="create-todo"
+            className="border border-blue-400 rounded-full w-5 h-5 mr-2"
+          ></label>
+          <span className="p-0">Create a new todo...</span>
+        </form>
+
+        <section className="bg-blue-300 border rounded mt-3 w-xs">
+          {todoItems.map((todoItem) => (
+            <ToDoItemComponent
+              todo={todoItem.todo}
+              isCompleted={todoItem.isCompleted}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          ))}
+        </section>
+
+        <section className="w-xs h-10 bg-blue-300 border rounded mt-3 flex justify-center items-center gap-2">
+          <label htmlFor="all">All</label>
+          <label htmlFor="active">Active</label>
+          <label htmlFor="completed">Completed</label>
+        </section>
+
+        <footer className="mt-3">
+          <span className="">Drag and drop to reorder list</span>
+        </footer>
       </main>
     </div>
   );
