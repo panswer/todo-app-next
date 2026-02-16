@@ -3,8 +3,12 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 
 import { ToDo } from '../models/todo';
 
+export type FilterType = "all" | "active" | "completed";
+
 type TodoStore = {
     todos: ToDo[];
+    filter: FilterType;
+    setFilter: (filter: FilterType) => void;
     addTodo: (todo: string, id: string) => void;
     removeTodo: (id: string) => void;
     updateTodo: (id: string, isDone: boolean) => void;
@@ -13,6 +17,8 @@ type TodoStore = {
 export const useTodoStore = create<TodoStore>()(
     persist((set) => ({
         todos: [],
+        filter: "all",
+        setFilter: (filter) => set({ filter }),
         addTodo: (todo, id) => set(state => ({ todos: state.todos.concat(new ToDo(todo, false, id)) })),
         removeTodo: (id) => set(state => ({ todos: state.todos.filter(todo => todo.id !== id) })),
         updateTodo: (id) => set(state => {
