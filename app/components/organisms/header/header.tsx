@@ -24,7 +24,7 @@ const HeaderComponent = (): ReactElement => {
 
   return (
     <header className="flex flex-row justify-between items-center w-xs mb-3">
-      <h1 className="uppercase font-bold text-xl">todo</h1>
+      <h1 className="uppercase font-bold text-xl text-gray-50">todo</h1>
 
       <button className="hover:cursor-pointer" onClick={toggleTheme}>
         <IconComponent type={isDark ? "sun" : "moon"} />

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: var(--color-gray-100);
   --foreground: #171717;
 }
 
@@ -26,11 +26,10 @@
   --color-gray-600: hsl(236, 9%, 61%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Aplica las variables oscuras solo cuando la clase .dark está presente */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 /* Agrega esto para activar el modo oscuro por clase */

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { arrayMove } from '@dnd-kit/sortable';
 
 import { ToDo } from '../models/todo';
 
@@ -12,6 +13,7 @@ type TodoStore = {
     addTodo: (todo: string, id: string) => void;
     removeTodo: (id: string) => void;
     updateTodo: (id: string, isDone: boolean) => void;
+    reorderItems: (oldIndex: number, newIndex: number) => void;
 }
 
 export const useTodoStore = create<TodoStore>()(
@@ -38,6 +40,9 @@ export const useTodoStore = create<TodoStore>()(
                 todos: newTodo,
             };
         }),
+        reorderItems: (oldIndex, newIndex) => set(state => ({
+            todos: arrayMove(state.todos, oldIndex, newIndex),
+        }))
     }), {
         name: 'todo-storage',
         storage: createJSONStorage(() => localStorage),

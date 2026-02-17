@@ -1,17 +1,34 @@
 "use client"
 
 import { ReactElement, useCallback } from "react";
+import { DndContext, closestCenter, DragEndEvent, useSensor, useSensors, MouseSensor, TouchSensor, KeyboardSensor } from '@dnd-kit/core';
+
 import ToDoItemComponent from "../../molecules/todo-item/todo-item";
 
 import { useTodoStore } from '@/app/store/todo-store';
+import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 
 const ToDoListComponent = (): ReactElement => {
   const {
     todos,
     updateTodo,
     removeTodo,
-    filter
+    filter,
+    reorderItems,
   } = useTodoStore();
+
+  const sensors = useSensors(
+    useSensor(MouseSensor),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   const handleChange = useCallback((id: string) => {
     const todo = todos.find((todo) => todo.id === id);
@@ -35,46 +52,61 @@ const ToDoListComponent = (): ReactElement => {
     });
   }, [todos]);
 
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (over && active.id !== over.id) {
+      const oldIndex = todos.findIndex(todo => todo.id === active.id);
+      const newIndex = todos.findIndex(todo => todo.id === over.id);
+
+      reorderItems(oldIndex, newIndex);
+    }
+  };
+
   return (
-    <section className="bg-blue-300 rounded mt-3 w-xs dark:bg-navy-900">
-      {filter === 'all' && todos.map((todo) => (
-        <ToDoItemComponent
-          isCompleted={todo.done}
-          todo={todo.title}
-          key={todo.id}
-          todoId={todo.id}
-          changeEvent={handleChange}
-          removeEvent={handleRemove}
-        />
-      ))}
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <section className="bg-gray-50 rounded mt-3 w-xs dark:bg-navy-900">
+        <SortableContext items={todos} strategy={verticalListSortingStrategy}>
+          {filter === 'all' && todos.map((todo) => (
+            <ToDoItemComponent
+              isCompleted={todo.done}
+              todo={todo.title}
+              key={todo.id}
+              todoId={todo.id}
+              changeEvent={handleChange}
+              removeEvent={handleRemove}
+            />
+          ))}
 
-      {filter === 'active' && todos.filter(({ done }) => !done).map((todo) => (
-        <ToDoItemComponent
-          isCompleted={todo.done}
-          todo={todo.title}
-          key={todo.id}
-          todoId={todo.id}
-          changeEvent={handleChange}
-          removeEvent={handleRemove}
-        />
-      ))}
+          {filter === 'active' && todos.filter(({ done }) => !done).map((todo) => (
+            <ToDoItemComponent
+              isCompleted={todo.done}
+              todo={todo.title}
+              key={todo.id}
+              todoId={todo.id}
+              changeEvent={handleChange}
+              removeEvent={handleRemove}
+            />
+          ))}
 
-      {filter === 'completed' && todos.filter(({ done }) => done).map((todo) => (
-        <ToDoItemComponent
-          isCompleted={todo.done}
-          todo={todo.title}
-          key={todo.id}
-          todoId={todo.id}
-          changeEvent={handleChange}
-          removeEvent={handleRemove}
-        />
-      ))}
+          {filter === 'completed' && todos.filter(({ done }) => done).map((todo) => (
+            <ToDoItemComponent
+              isCompleted={todo.done}
+              todo={todo.title}
+              key={todo.id}
+              todoId={todo.id}
+              changeEvent={handleChange}
+              removeEvent={handleRemove}
+            />
+          ))}
+        </SortableContext>
 
-      <div className="flex align-center justify-between my-3 px-7">
-        <span className="dark:text-purple-600">{todos.filter(({ done }) => !done).length} items left</span>
-        <button className="hover:cursor-pointer capitalize dark:text-purple-600" onClick={handleCleanCompleted}>clear completed</button>
-      </div>
-    </section>
+        <div className="flex align-center justify-between my-3 px-7">
+          <span className="text-gray-600 dark:text-purple-600">{todos.filter(({ done }) => !done).length} items left</span>
+          <button className="text-gray-600 hover:cursor-pointer capitalize dark:text-purple-600" onClick={handleCleanCompleted}>clear completed</button>
+        </div>
+      </section>
+    </DndContext>
   );
 };
 

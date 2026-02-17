@@ -11,9 +11,9 @@ const ToDoFilter = () => {
   }, []);
 
   return (
-    <section className="w-xs h-10 bg-blue-300 rounded mt-3 flex justify-center items-center gap-2 dark:bg-navy-900">
+    <section className="w-xs h-10 bg-gray-50 rounded mt-3 flex justify-center items-center gap-2 dark:bg-navy-900">
       <button
-        className={`capitalize hover:cursor-pointer ${filter === 'all' ? 'dark:text-blue-500' : 'dark:text-purple-600'}`}
+        className={`capitalize hover:cursor-pointer ${filter === 'all' ? 'text-blue-500 dark:text-blue-500' : 'text-gray-600 dark:text-purple-600'}`}
         onClick={() => {
           handleClick("all");
         }}
@@ -21,7 +21,7 @@ const ToDoFilter = () => {
         all
       </button>
       <button
-        className={`capitalize hover:cursor-pointer ${filter === 'active' ? 'dark:text-blue-500' : 'dark:text-purple-600'}`}
+        className={`capitalize hover:cursor-pointer ${filter === 'active' ? 'text-blue-500 dark:text-blue-500' : 'text-gray-600 dark:text-purple-600'}`}
         onClick={() => {
           handleClick("active");
         }}
@@ -29,7 +29,7 @@ const ToDoFilter = () => {
         active
       </button>
       <button
-        className={`capitalize hover:cursor-pointer ${filter === 'completed' ? 'dark:text-blue-500' : 'dark:text-purple-600'}`}
+        className={`capitalize hover:cursor-pointer ${filter === 'completed' ? 'text-blue-500 dark:text-blue-500' : 'text-gray-600 dark:text-purple-600'}`}
         onClick={() => {
           handleClick("completed");
         }}

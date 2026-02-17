@@ -1,25 +1,19 @@
+"use client"
+
 import BaseLayout from "./components/layouts/base";
 import HeaderComponent from "./components/organisms/header/header";
 import ToDoListComponent from "./components/organisms/todo-list/TodoList";
-import { ToDoItem } from "./components/molecules/todo-item/todo-item";
 import ToDoFormComponent from "./components/organisms/todo-form/todo-form";
 import ToDoFilter from "./components/organisms/todo-filter/todo-filter";
 
+import { useHasHydrated } from '@/app/hooks/useHydration';
+
 export default function Home() {
-  const todoItems: ToDoItem[] = [
-    {
-      todo: "todo 1",
-      isCompleted: false,
-    },
-    {
-      todo: "todo 2",
-      isCompleted: true,
-    },
-    {
-      todo: "todo 3",
-      isCompleted: false,
-    },
-  ];
+  const hasHydrated = useHasHydrated();
+
+  if (!hasHydrated) {
+    return null;
+  }
 
   return (
     <BaseLayout>
@@ -28,12 +22,12 @@ export default function Home() {
 
         <ToDoFormComponent />
 
-        <ToDoListComponent todoItems={todoItems} />
+        <ToDoListComponent />
 
         <ToDoFilter />
 
         <footer className="mt-5">
-          <span className="">Drag and drop to reorder list</span>
+          <span className="text-gray-600">Drag and drop to reorder list</span>
         </footer>
       </>
     </BaseLayout>

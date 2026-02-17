@@ -17,7 +17,7 @@ const ToDoCheckComponent = ({
   const [classes, setClasses] = useState<string>('');
 
   useEffect(() => {
-    const defaultClasses = 'w-5 h-5 border-1 border-blue-400 rounded-full flex align-center justify-center p-1 hover:cursor-pointer dark:border-gray-600';
+    const defaultClasses = 'w-5 h-5 border-1 border-gray-300 rounded-full flex align-center justify-center p-1 hover:cursor-pointer dark:border-gray-600';
 
     if (checked) {
       setClasses(`${defaultClasses} bg-linear-135 from-blue-400 to-pink-500`);
