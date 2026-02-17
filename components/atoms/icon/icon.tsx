@@ -1,7 +1,8 @@
-import MoonIcon from "../../../images/icon-moon.svg";
-import SunIcon from "../../../images/icon-sun.svg";
-import CrossIcon from "../../../images/icon-cross.svg";
-import CheckIcon from "../../../images/icon-check.svg";
+import MoonIcon from "@/app/images/icon-moon.svg";
+import SunIcon from "@/app/images/icon-sun.svg";
+import CrossIcon from "@/app/images/icon-cross.svg";
+import CheckIcon from "@/app/images/icon-check.svg";
+import { ReactElement } from "react";
 
 export type IconType = "moon" | "sun" | "cross" | "check";
 
@@ -10,7 +11,7 @@ interface IconProps {
   classImg?: string;
 }
 
-const IconComponent = ({ type, classImg = '' }: IconProps) => {
+const IconComponent = ({ type, classImg = '' }: IconProps): ReactElement => {
   const icons: Record<IconType, any> = {
     moon: MoonIcon,
     sun: SunIcon,

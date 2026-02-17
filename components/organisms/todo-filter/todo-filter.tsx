@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { TodoFilterOptionsComponent } from "../../molecules/todo-filter-options/todo-filter-options";
+import { TodoFilterOptionsComponent } from "@/components/molecules/todo-filter-options/todo-filter-options";
 
 const ToDoFilter = (): ReactElement => {
 

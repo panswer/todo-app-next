@@ -1,10 +1,10 @@
 "use client"
 
-import BaseLayout from "./components/layouts/base";
-import HeaderComponent from "./components/organisms/header/header";
-import ToDoListComponent from "./components/organisms/todo-list/TodoList";
-import ToDoFormComponent from "./components/organisms/todo-form/todo-form";
-import ToDoFilter from "./components/organisms/todo-filter/todo-filter";
+import BaseLayout from "@/components/layouts/base";
+import HeaderComponent from "@/components/organisms/header/header";
+import ToDoListComponent from "@/components/organisms/todo-list/TodoList";
+import ToDoFormComponent from "@/components/organisms/todo-form/todo-form";
+import ToDoFilter from "@/components/organisms/todo-filter/todo-filter";
 
 import { useHasHydrated } from '@/app/hooks/useHydration';
 

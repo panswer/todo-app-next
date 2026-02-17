@@ -4,8 +4,8 @@ import { ReactElement, useCallback } from "react";
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from "@dnd-kit/utilities";
 
-import ToDoCheckComponent from "../../atoms/todo-check/todo-check";
-import IconComponent from "../../atoms/icon/icon";
+import ToDoCheckComponent from "@/components/atoms/todo-check/todo-check";
+import IconComponent from "@/components/atoms/icon/icon";
 
 export interface ToDoItem {
   todo: string;

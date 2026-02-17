@@ -3,7 +3,7 @@
 import { ReactElement, useCallback } from "react";
 import { DndContext, closestCenter, DragEndEvent, useSensor, useSensors, MouseSensor, TouchSensor, KeyboardSensor } from '@dnd-kit/core';
 
-import ToDoItemComponent from "../../molecules/todo-item/todo-item";
+import ToDoItemComponent from "@/components/molecules/todo-item/todo-item";
 import { TodoFilterOptionsComponent } from "../../molecules/todo-filter-options/todo-filter-options";
 
 import { useTodoStore } from '@/app/store/todo-store';

@@ -1,7 +1,7 @@
 "use client"
 
 import { ReactElement, useEffect, useState } from "react";
-import IconComponent from "../../atoms/icon/icon";
+import IconComponent from "@/components/atoms/icon/icon";
 
 const HeaderComponent = (): ReactElement => {
   const [isDark, setIsDark] = useState(false);
