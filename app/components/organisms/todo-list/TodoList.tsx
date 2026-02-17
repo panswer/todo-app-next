@@ -36,7 +36,7 @@ const ToDoListComponent = (): ReactElement => {
   }, [todos]);
 
   return (
-    <section className="bg-blue-300 border rounded mt-3 w-xs">
+    <section className="bg-blue-300 rounded mt-3 w-xs dark:bg-navy-900">
       {filter === 'all' && todos.map((todo) => (
         <ToDoItemComponent
           isCompleted={todo.done}
@@ -71,8 +71,8 @@ const ToDoListComponent = (): ReactElement => {
       ))}
 
       <div className="flex align-center justify-between my-3 px-7">
-        <span>{todos.filter(({ done }) => !done).length} items left</span>
-        <button className="hover:cursor-pointer capitalize" onClick={handleCleanCompleted}>clear completed</button>
+        <span className="dark:text-purple-600">{todos.filter(({ done }) => !done).length} items left</span>
+        <button className="hover:cursor-pointer capitalize dark:text-purple-600" onClick={handleCleanCompleted}>clear completed</button>
       </div>
     </section>
   );

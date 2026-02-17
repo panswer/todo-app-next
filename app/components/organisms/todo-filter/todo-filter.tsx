@@ -4,16 +4,16 @@ import { FilterType, useTodoStore } from "@/app/store/todo-store";
 import { useCallback } from "react";
 
 const ToDoFilter = () => {
-  const { setFilter } = useTodoStore();
+  const { setFilter, filter } = useTodoStore();
 
   const handleClick = useCallback((filter: FilterType) => {
     setFilter(filter);
   }, []);
 
   return (
-    <section className="w-xs h-10 bg-blue-300 border rounded mt-3 flex justify-center items-center gap-2">
+    <section className="w-xs h-10 bg-blue-300 rounded mt-3 flex justify-center items-center gap-2 dark:bg-navy-900">
       <button
-        className="capitalize hover:cursor-pointer"
+        className={`capitalize hover:cursor-pointer ${filter === 'all' ? 'dark:text-blue-500' : 'dark:text-purple-600'}`}
         onClick={() => {
           handleClick("all");
         }}
@@ -21,7 +21,7 @@ const ToDoFilter = () => {
         all
       </button>
       <button
-        className="capitalize hover:cursor-pointer"
+        className={`capitalize hover:cursor-pointer ${filter === 'active' ? 'dark:text-blue-500' : 'dark:text-purple-600'}`}
         onClick={() => {
           handleClick("active");
         }}
@@ -29,7 +29,7 @@ const ToDoFilter = () => {
         active
       </button>
       <button
-        className="capitalize hover:cursor-pointer"
+        className={`capitalize hover:cursor-pointer ${filter === 'completed' ? 'dark:text-blue-500' : 'dark:text-purple-600'}`}
         onClick={() => {
           handleClick("completed");
         }}

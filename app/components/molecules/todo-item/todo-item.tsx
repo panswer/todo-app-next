@@ -1,7 +1,8 @@
 "use client"
 
-import { ReactElement, useCallback, useId } from "react";
+import { ReactElement, useCallback } from "react";
 import ToDoCheckComponent from "../../atoms/todo-check/todo-check";
+import IconComponent from "../../atoms/icon/icon";
 
 export interface ToDoItem {
   todo: string;
@@ -19,7 +20,7 @@ const ToDoItemComponent = ({
   todoId
 }: ToDoItem): ReactElement => {
 
-  const handleChange = useCallback((id: string) => {
+  const handleChange = useCallback(() => {
     if (!changeEvent) return;
 
     changeEvent(todoId);
@@ -34,7 +35,7 @@ const ToDoItemComponent = ({
   }, []);
 
   return (
-    <article className="border-b w-full h-10 flex items-center py-2 px-4 last:border-0 gap-2">
+    <article className="border-b w-full h-10 flex items-center py-2 px-4 last:border-0 gap-2 dark:text-purple-600 dark:border-purple-600">
       <ToDoCheckComponent
         checked={isCompleted}
         id={todoId}
@@ -43,7 +44,9 @@ const ToDoItemComponent = ({
 
       <span>{todo}</span>
 
-      <button className="ml-auto uppercase hover:cursor-pointer" onClick={handleRemove}>x</button>
+      <button className="ml-auto uppercase hover:cursor-pointer" onClick={handleRemove}>
+        <IconComponent type="cross" />
+      </button>
     </article>
   );
 };

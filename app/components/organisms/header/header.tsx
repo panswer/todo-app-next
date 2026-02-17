@@ -1,13 +1,33 @@
-import { ReactElement } from "react";
+"use client"
+
+import { ReactElement, useEffect, useState } from "react";
 import IconComponent from "../../atoms/icon/icon";
 
 const HeaderComponent = (): ReactElement => {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Detecta si el sistema prefiere modo oscuro o si la clase ya está presente
+    const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const hasDarkClass = document.documentElement.classList.contains("dark");
+
+    if (hasDarkClass || isSystemDark) {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    document.documentElement.classList.toggle("dark");
+    setIsDark((prev) => !prev);
+  };
+
   return (
     <header className="flex flex-row justify-between items-center w-xs mb-3">
       <h1 className="uppercase font-bold text-xl">todo</h1>
 
-      <button className="hover:cursor-pointer">
-        <IconComponent type="moon" />
+      <button className="hover:cursor-pointer" onClick={toggleTheme}>
+        <IconComponent type={isDark ? "sun" : "moon"} />
       </button>
     </header>
   );

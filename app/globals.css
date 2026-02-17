@@ -5,10 +5,25 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-josefin-sans: var(--font-josefin-sans);
+@theme {
+  --color-blue-500: hsl(220, 98%, 61%);
+  --color-blue-400: hsl(192, 100%, 67%);
+  --color-pink-500: hsl(280, 87%, 65%);
+  /* Light theme */
+  --color-gray-50: hsl(0, 0%, 98%);
+  --color-purple-300: hsl(234, 39%, 85%);
+  --color-gray-300: hsl(233, 11%, 84%);
+  --color-gray-600: hsl(236, 9%, 61%);
+  --color-navy-850: hsl(235, 19%, 35%);
+  /* Dark theme */
+  --color-navy-950: hsl(235, 21%, 11%);
+  --color-navy-900: hsl(235, 24%, 19%);
+  --color-purple-300: hsl(234, 39%, 85%);
+  --color-purple-100: hsl(236, 33%, 92%);
+  --color-purple-600: hsl(235, 16%, 43%);
+  --color-purple-700: hsl(233, 14%, 35%);
+  --color-purple-800: hsl(237, 14%, 26%);
+  --color-gray-600: hsl(236, 9%, 61%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,6 +32,9 @@
     --foreground: #ededed;
   }
 }
+
+/* Agrega esto para activar el modo oscuro por clase */
+@variant dark (&:where(.dark, .dark *));
 
 body {
   background: var(--background);
