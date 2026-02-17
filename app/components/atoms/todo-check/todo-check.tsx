@@ -29,11 +29,14 @@ const ToDoCheckComponent = ({
   const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
+    console.log('here');
+    
+
     clickEvent();
   }, [clickEvent]);
 
   return (
-    <button className={classes} onClick={handleClick}>
+    <button className={classes} onClick={handleClick} onMouseDown={(e) => e.stopPropagation()}>
       {checked ? <img src={checkImg.src} alt="check icon" /> : <></>}
     </button>
   );

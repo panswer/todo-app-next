@@ -59,7 +59,7 @@ const ToDoItemComponent = ({
 
       <span>{todo}</span>
 
-      <button className="ml-auto uppercase hover:cursor-pointer" onClick={handleRemove}>
+      <button className="ml-auto uppercase hover:cursor-pointer" onClick={handleRemove} onMouseDown={(e) => e.stopPropagation()}>
         <IconComponent type="cross" />
       </button>
     </article>

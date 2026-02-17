@@ -22,7 +22,7 @@ const ToDoListComponent = (): ReactElement => {
     useSensor(MouseSensor),
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 250,
+        delay: 600,
         tolerance: 5,
       },
     }),
