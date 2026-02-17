@@ -23,11 +23,11 @@ const HeaderComponent = (): ReactElement => {
   };
 
   return (
-    <header className="flex flex-row justify-between items-center w-xs mb-3">
-      <h1 className="uppercase font-bold text-xl text-gray-50">todo</h1>
+    <header className="flex flex-row justify-between items-center w-xs mb-3 md:w-xl">
+      <h1 className="uppercase font-bold text-xl text-gray-50 md:text-2xl">todo</h1>
 
       <button className="hover:cursor-pointer" onClick={toggleTheme}>
-        <IconComponent type={isDark ? "sun" : "moon"} />
+        <IconComponent type={isDark ? "sun" : "moon"} classImg="md:w-[2em] md:h-[2em]" />
       </button>
     </header>
   );

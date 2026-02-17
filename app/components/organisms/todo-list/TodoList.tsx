@@ -4,6 +4,7 @@ import { ReactElement, useCallback } from "react";
 import { DndContext, closestCenter, DragEndEvent, useSensor, useSensors, MouseSensor, TouchSensor, KeyboardSensor } from '@dnd-kit/core';
 
 import ToDoItemComponent from "../../molecules/todo-item/todo-item";
+import { TodoFilterOptionsComponent } from "../../molecules/todo-filter-options/todo-filter-options";
 
 import { useTodoStore } from '@/app/store/todo-store';
 import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
@@ -65,7 +66,7 @@ const ToDoListComponent = (): ReactElement => {
 
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <section className="bg-gray-50 rounded mt-3 w-xs dark:bg-navy-900">
+      <section className="bg-gray-50 rounded mt-3 w-xs dark:bg-navy-900 md:w-xl">
         <SortableContext items={todos} strategy={verticalListSortingStrategy}>
           {filter === 'all' && todos.map((todo) => (
             <ToDoItemComponent
@@ -103,6 +104,9 @@ const ToDoListComponent = (): ReactElement => {
 
         <div className="flex align-center justify-between my-3 px-7">
           <span className="text-gray-600 dark:text-purple-600">{todos.filter(({ done }) => !done).length} items left</span>
+          <div className="hidden md:flex gap-2">
+            <TodoFilterOptionsComponent />
+          </div>
           <button className="text-gray-600 hover:cursor-pointer capitalize dark:text-purple-600" onClick={handleCleanCompleted}>clear completed</button>
         </div>
       </section>

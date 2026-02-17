@@ -20,7 +20,7 @@ const ToDoFormComponent = (): ReactElement => {
 
   return (
     <form
-      className="rounded bg-gray-50 text-navy-850 w-xs flex column items-center h-10 py-2 px-4 gap-3 dark:bg-navy-900"
+      className="rounded bg-gray-50 text-navy-850 w-xs flex column items-center h-10 py-2 px-4 gap-3 dark:bg-navy-900 md:w-xl"
       onSubmit={handleSubmit}
     >
       <button className="rounded-full border border-gray-300 h-5 w-5 dark:border-gray-600"></button>

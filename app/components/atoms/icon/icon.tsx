@@ -7,9 +7,10 @@ export type IconType = "moon" | "sun" | "cross" | "check";
 
 interface IconProps {
   type: IconType;
+  classImg?: string;
 }
 
-const IconComponent = ({ type }: IconProps) => {
+const IconComponent = ({ type, classImg = '' }: IconProps) => {
   const icons: Record<IconType, any> = {
     moon: MoonIcon,
     sun: SunIcon,
@@ -17,7 +18,7 @@ const IconComponent = ({ type }: IconProps) => {
     check: CheckIcon,
   };
 
-  return <img src={icons[type]?.src} alt="icon" className="w-3 h-3" />;
+  return <img src={icons[type]?.src} alt="icon" className={"w-3 h-3" + ` ${classImg}`} />;
 };
 
 export default IconComponent;
